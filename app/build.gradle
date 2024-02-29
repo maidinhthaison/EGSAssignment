@@ -1,0 +1,251 @@
+plugins {
+
+    // core
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+
+    // dependencies injection, inject classes generator
+    id 'com.google.dagger.hilt.android'
+
+
+    // navigation arguments generator
+    id 'androidx.navigation.safeargs.kotlin'
+
+    // (deprecated), but data-binding still use as annotation processor
+    id 'kotlin-kapt'
+
+}
+
+android {
+    namespace 'com.example.movedb'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.movedb"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        signingConfigs {
+            release {
+                storePassword '123456'
+                keyPassword '123456'
+                keyAlias 'release_keystore'
+                //storeFile file('../release_keystore.jks')
+            }
+            staging{
+                storePassword 'egs!23456'
+                keyPassword 'egs!23456'
+                keyAlias 'stag_keystore'
+                //storeFile file('../debug_keystore.jks')
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            applicationIdSuffix = ".debug"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+        buildConfig true
+    }
+
+    /**
+     *
+     */
+    flavorDimensions.add("environment")
+    productFlavors {
+        dev {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            signingConfig signingConfigs.staging
+        }
+
+        stag {
+            dimension = "environment"
+            applicationIdSuffix = ".staging"
+            signingConfig signingConfigs.staging
+        }
+
+        prod {
+            dimension = "environment"
+        }
+
+    }
+
+    packagingOptions {
+        exclude 'META-INF/*'
+    }
+}
+
+dependencies {
+
+
+    def kotlin_version = "1.4.1"
+
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+
+    /**
+     * Libraries
+     */
+    // Coroutines
+    def coroutines_version = "1.7.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    // Architectural Components
+    def lifecycle_version = "2.2.0"
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    // Activity KTX for viewModels()
+    implementation "androidx.activity:activity-ktx:1.8.2"
+
+    //Dagger - Hilt
+    implementation "com.google.dagger:hilt-android:2.48"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.annotation:annotation:1.7.1'
+
+    kapt "com.google.dagger:hilt-android-compiler:2.48"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.2.0"
+
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+
+    //Log
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Datastore
+    implementation "androidx.datastore:datastore-preferences:1.1.0-beta01"
+
+    //Nav
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
+
+    //Testing
+    def mockito_version = "3.0.0"
+    def mockito_android_version = "2.24.5"
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'androidx.arch.core:core-testing:2.2.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_android_version"
+
+}
+kapt {
+    correctErrorTypes true
+}
+
+hilt {
+    enableAggregatingTask = true
+}
+/*
+
+class SDPFactory extends DefaultTask {
+
+    @Input
+    String unit = "dp"
+    @Input
+    double positiveMax = 600
+    @Input
+    double negativeMax = 60
+
+    @TaskAction
+    def create() {
+        String resFolder =  project.getProjectDir().getPath() + "/src/main/res/"
+        for(double dimen = 300; dimen <= 1080 ; dimen = dimen + 30){
+            String folder = resFolder + "values-sw" + (int)dimen + "dp"
+            String fileName = folder + "/positive_sdps.xml"
+            new File(folder).mkdir()
+            new File(fileName).createNewFile()
+            PrintWriter printWriter = new PrintWriter(fileName)
+            printWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
+            printWriter.println("<resources>")
+            for(int i=1; i<=positiveMax; i++){
+                double ratio = i/300d
+                double sdp = ratio*dimen
+                printWriter.printf("\t<dimen name=\"_%dsdp\">%.2f" + unit + "</dimen>\r\n",i,sdp)
+            }
+            printWriter.println("</resources>")
+            printWriter.close()
+        }
+        for(double dimen = 300; dimen <= 1080; dimen = dimen + 30){
+            String folder = resFolder + "values-sw" + (int)dimen + "dp"
+            String fileName = folder + "/negative_sdps.xml"
+            new File(folder).mkdir()
+            new File(fileName).createNewFile()
+            PrintWriter printWriter = new PrintWriter(fileName)
+            printWriter.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
+            printWriter.println("<resources>")
+            for(int i=1;i<=negativeMax;i++){
+                double ratio = i/300d
+                double sdp = ratio*dimen
+                printWriter.printf("\t<dimen name=\"_minus%dsdp\">%.2f" + unit + "</dimen>\r\n",i,-sdp)
+            }
+            printWriter.println("</resources>")
+            printWriter.close()
+        }
+    }
+}
+
+task createSDP(type: SDPFactory) {
+}
+
+//uncomment next line to edit values
+//preBuild.dependsOn createSDP
+
+createSDP{
+    unit = "dp"//change to "sp" if needed
+    positiveMax = 600//change to 600 or any other value if needed
+    negativeMax = 60//change to 600 or any other value if needed
+}
+clean.dependsOn createSDP*/

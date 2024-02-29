@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MoveDB</string>
+    <string name="message_api_error">API error</string>
+</resources>
