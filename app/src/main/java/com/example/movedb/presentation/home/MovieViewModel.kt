@@ -17,10 +17,11 @@ class MovieViewModel @Inject constructor(
     private val _uiGetMovieModel = MutableStateFlow(MovieUIModel())
     val uiGetMovieModel = _uiGetMovieModel.asStateFlow()
 
-    fun getListMovies() {
+    fun getListMovies(version: String, include_adult: Boolean, include_video: Boolean,
+                      language: String, page : Int, sort_by: String) {
         viewModelScope.launch {
-            getMovieUseCase(version = "3", include_adult = true, include_video = true, language = "en-US",
-                page = 1, sort_by = "popularity.desc"
+            getMovieUseCase(version = version, include_adult = include_adult, include_video = include_video,
+                language = language, page = page, sort_by = sort_by
             ).collectAsState(_uiGetMovieModel)
         }
     }

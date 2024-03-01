@@ -38,4 +38,4 @@ data class MovieItem(
     @SerializedName("vote_count") val vote_count: Int?
 ) : Serializable
 
-const val PATH_IMAGE_URL: String  = "https://image.tmdb.org/t/p/w500"
+

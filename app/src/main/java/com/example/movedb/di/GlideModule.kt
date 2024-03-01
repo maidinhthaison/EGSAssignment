@@ -102,7 +102,7 @@ class GlideUtils : AppGlideModule() {
         }
     }
 
-    fun loadPosterImage(context: Context, url: String?, imageView: AppCompatImageView) {
+    fun loadImageFitCenter(context: Context, url: String?, imageView: AppCompatImageView) {
         val options: RequestOptions = RequestOptions()
             .fitCenter()
             .placeholder(R.drawable.ic_launcher_background)
@@ -115,14 +115,14 @@ class GlideUtils : AppGlideModule() {
 
     }
 
-    fun loadBackDropImage(context: Context, url: String?, imageView: AppCompatImageView) {
+    fun loadImageCenterCrop(context: Context, url: String?, imageView: AppCompatImageView) {
         val options: RequestOptions = RequestOptions()
-            .fitCenter()
+            .centerCrop()
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
         GlideApp.with(context)
             .load(url)
-            .transform(FitCenter())
+            .transform(CenterCrop())
             .apply(options)
             .transition(DrawableTransitionOptions.withCrossFade()).into(imageView)
 

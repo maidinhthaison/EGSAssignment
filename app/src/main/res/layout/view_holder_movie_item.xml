@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/_5sdp"
-    android:layout_height="@dimen/_300sdp"
+    android:layout_height="@dimen/_310sdp"
     app:cardCornerRadius="@dimen/_4sdp"
     app:cardElevation="@dimen/_4sdp"
     app:strokeColor="@android:color/transparent"
@@ -23,6 +23,8 @@
             android:layout_height="@dimen/_200sdp"/>
 
         <com.google.android.material.textview.MaterialTextView
+            android:ellipsize="end"
+            android:maxLines="1"
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,17 +53,32 @@
             android:id="@+id/tvOverview"
             android:textSize="@dimen/_12sdp"
             tools:text="Overview"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_below="@+id/tvOverview"
+
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:id="@+id/tvVoteAverage"
-            android:textSize="@dimen/_12sdp"
-            tools:text="Vote"/>
+            android:layout_height="wrap_content">
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/pbVotePercent"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progress="75"
+                android:progressDrawable="@drawable/circle" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvVoteCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

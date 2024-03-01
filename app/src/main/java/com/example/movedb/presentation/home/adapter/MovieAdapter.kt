@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movedb.config.PATH_IMAGE_URL
 import com.example.movedb.data.api.model.response.MovieItem
-import com.example.movedb.data.api.model.response.PATH_IMAGE_URL
 import com.example.movedb.databinding.ViewHolderMovieItemBinding
 import com.example.movedb.di.GlideUtils
 import com.example.movedb.utils.formatDateServer2DateGrid
@@ -47,13 +47,14 @@ internal class MovieAdapter (
             binding.tvTitle.text = item.title
             binding.tvOverview.text = item.overview
             binding.tvDate.text= item.release_date?.let { formatDateServer2DateGrid(it) }
-            binding.tvVoteAverage.text =  "Vote: ${item.vote_average?.times(10)?.toInt().toString().plus("*")}"
+            binding.tvVoteCount.text = item.vote_average?.times(10)?.toInt().toString().plus("*")
+            binding.pbVotePercent.progress = item.vote_average?.times(10)?.toInt()!!
             //Download image
-            GlideUtils().loadPosterImage(
+            GlideUtils().loadImageCenterCrop(
                 context,
                 PATH_IMAGE_URL.plus(item.poster_path), binding.ivMovieThumb
             )
-            binding.ivMovieThumb.setOnClickListener {
+            binding.root.setOnClickListener {
                 onClicked?.invoke(ListMovieUIEvent.OnItemClicked(item))
             }
         }

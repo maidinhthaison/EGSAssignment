@@ -44,7 +44,8 @@ class HomeFragment :
         }
 
         with(movieViewModel) {
-            getListMovies()
+            getListMovies(version = "3", include_adult = true, include_video = true, language = "en-US",
+                page = 1, sort_by = "popularity.desc")
         }
 
         movieViewModel.uiGetMovieModel.collectWhenStarted {

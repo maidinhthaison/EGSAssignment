@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">MoveDB</string>
     <string name="message_api_error">API error</string>
+    <string name="text_egs_assignment">EGS Assignment</string>
+
     <!--Movie Detail-->
     <string name="text_movie_title">Title: %1$s</string>
     <string name="text_movie_adult">Adult</string>
     <string name="text_movie_overview">Overview: %1$s</string>
     <string name="text_movie_popularity">Popularity: %1$s</string>
     <string name="text_movie_release_date">Release Date: %1$s</string>
-    <string name="text_movie_vote">Vote count: %1$s - Average: %2$s</string>
+    <string name="text_movie_vote">Vote: %1$s</string>
 </resources>

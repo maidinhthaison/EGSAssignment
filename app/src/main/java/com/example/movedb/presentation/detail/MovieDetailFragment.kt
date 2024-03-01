@@ -8,13 +8,12 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.movedb.R
 import com.example.movedb.base.BaseFragment
+import com.example.movedb.config.PATH_IMAGE_URL
 import com.example.movedb.data.api.model.response.MovieItem
-import com.example.movedb.data.api.model.response.PATH_IMAGE_URL
 import com.example.movedb.databinding.FragmentMovieDetailBinding
 import com.example.movedb.di.GlideUtils
 import com.example.movedb.presentation.home.HomeFragment
 import com.example.movedb.utils.formatDateServer2DateGrid
-import timber.log.Timber
 
 class MovieDetailFragment :
     BaseFragment<FragmentMovieDetailBinding>() {
@@ -39,10 +38,14 @@ class MovieDetailFragment :
 
             }
         movieItem?.let { bindData(it) }
+
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
     private fun bindData(movieItem: MovieItem){
         binding.tvTitle.text = String.format(getString(R.string.text_movie_title),movieItem.title)
-        GlideUtils().loadBackDropImage(
+        GlideUtils().loadImageFitCenter(
             requireContext(),
             PATH_IMAGE_URL.plus(movieItem.backdrop_path), binding.ivBackDrop
         )
