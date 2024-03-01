@@ -1,22 +1,22 @@
 # EGSAssignment
 EGS Assignment
 ## Technical
-Clean Architecture
-MVVM design pattern
-Dagger Hilt DI
-Kotlin Flow Coroutines
+Clean Architecture\
+MVVM design pattern\
+Dagger Hilt DI\
+Kotlin Flow Coroutines\\
 
-View:
-Material Design
-AppCompat
-Navigator component
+View:\
+Material Design\
+AppCompat\
+Navigator component\\
 
-3rd libs:
-Retrofit restful
-AndroidX Kotlin Extension
-Glide
-Timber for logging
+3rd libs:\
+Retrofit restful\
+AndroidX Kotlin Extension\
+Glide\
+Timber for logging\\
 
-Testing:
+Testing:\
 MockK unit test
 
