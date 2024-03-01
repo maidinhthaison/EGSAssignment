@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/_5sdp"
+    android:layout_height="@dimen/_300sdp"
+    app:cardCornerRadius="@dimen/_4sdp"
+    app:cardElevation="@dimen/_4sdp"
+    app:strokeColor="@android:color/transparent"
+    app:strokeWidth="0dp">
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:padding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMovieThumb"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/ic_video_poster_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivMovieThumb"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            tools:text="Title" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            tools:text="Date" />
+        <com.google.android.material.textview.MaterialTextView
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_below="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/tvOverview"
+            android:textSize="@dimen/_12sdp"
+            tools:text="Overview"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_below="@+id/tvOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/tvVoteAverage"
+            android:textSize="@dimen/_12sdp"
+            tools:text="Vote"/>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

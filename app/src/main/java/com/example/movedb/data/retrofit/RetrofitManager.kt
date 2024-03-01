@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit
 class RetrofitManager (
     private val gson: Gson,
     private val connectivityDataSource: ConnectivityDataSource,
-    private val movieRepository: MovieRepository,
-    private val baseUrl: String
+    private val baseUrl: String,
+    private val jwtToken: String
 ) {
     class NetworkLogger : HttpLoggingInterceptor.Logger {
         override fun log(message: String?) {
@@ -36,7 +36,7 @@ class RetrofitManager (
 
                 val newRequestBuilder = chain.request().newBuilder()
                 newRequestBuilder.addHeader("accept", "application/json")
-                newRequestBuilder.addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNWJhZDQwMDkzMzBkYjg4YTA3YjYyYjEwZTkxNzFlYSIsInN1YiI6IjY1ZTA1OGIwNTI5NGU3MDE2MzRlYTQ4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QqlyfqCRjGD99wXHXgw0Ap2YW0rOfVRwUHX84-mvRqw")
+                newRequestBuilder.addHeader("Authorization", "Bearer $jwtToken")
                 val newRequest = newRequestBuilder.build()
                 return@addNetworkInterceptor chain.proceed(newRequest)
             }

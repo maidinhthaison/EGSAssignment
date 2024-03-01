@@ -8,7 +8,6 @@ import timber.log.Timber
 
 @HiltAndroidApp
 class MovieApp : MultiDexApplication() {
-
     companion object {
         lateinit var instance: MovieApp
             private set
@@ -24,7 +23,5 @@ class MovieApp : MultiDexApplication() {
             Timber.plant(ReleaseTree())
         }
     }
-
-
 
 }

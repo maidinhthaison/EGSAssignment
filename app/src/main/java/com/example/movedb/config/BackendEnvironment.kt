@@ -1,19 +1,23 @@
 package com.example.movedb.config
 
-enum class BackendEnvironment (
-    val baseUrl: String
+enum class BackendEnvironment(
+    val baseUrl: String,
+    val jwtToken: String
 ) {
 
     Dev(
-    baseUrl = "https://api-dev.klara.tech/"
+        baseUrl = "https://api.themoviedb.org",
+        jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNWJhZDQwMDkzMzBkYjg4YTA3YjYyYjEwZTkxNzFlYSIsInN1YiI6IjY1ZTA1OGIwNTI5NGU3MDE2MzRlYTQ4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QqlyfqCRjGD99wXHXgw0Ap2YW0rOfVRwUHX84-mvRqw"
     ),
 
     Staging(
-    baseUrl = "https://api-dev.klara.tech/"
+        baseUrl = "https://api.themoviedb.org",
+        jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNWJhZDQwMDkzMzBkYjg4YTA3YjYyYjEwZTkxNzFlYSIsInN1YiI6IjY1ZTA1OGIwNTI5NGU3MDE2MzRlYTQ4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QqlyfqCRjGD99wXHXgw0Ap2YW0rOfVRwUHX84-mvRqw"
     ),
 
     Prod(
-    baseUrl = "https://swisspost.com"
+        baseUrl = "https://api.themoviedb.org",
+        jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNWJhZDQwMDkzMzBkYjg4YTA3YjYyYjEwZTkxNzFlYSIsInN1YiI6IjY1ZTA1OGIwNTI5NGU3MDE2MzRlYTQ4ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QqlyfqCRjGD99wXHXgw0Ap2YW0rOfVRwUHX84-mvRqw"
     )
 
 }

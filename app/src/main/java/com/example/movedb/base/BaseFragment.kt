@@ -1,13 +1,9 @@
 package com.example.movedb.base
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.FileProvider
-import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
@@ -37,6 +33,25 @@ abstract class BaseFragment <T : ViewBinding> : Fragment() {
         super.onDestroyView()
     }
 
+    /**
+     * Safe collect flow
+     */
+
+    fun <T> Flow<T>.collectWhenStarted(action: suspend (T) -> Unit) {
+        collectWhenOwnerStarted(viewLifecycleOwner, action)
+    }
+
+    fun <T> Flow<T>.collectLatestWhenStarted(action: suspend (T) -> Unit) {
+        collectLatestWhenOwnerStarted(viewLifecycleOwner, action)
+    }
+
+    fun <T> Flow<T>.collectWhenResumed(action: suspend (T) -> Unit) {
+        collectWhenOwnerResumed(viewLifecycleOwner, action)
+    }
+
+    fun <T> Flow<T>.collectWhenCreated(action: suspend (T) -> Unit) {
+        collectWhenOwnerCreated(viewLifecycleOwner, action)
+    }
 }
 
 

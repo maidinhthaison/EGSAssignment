@@ -116,7 +116,7 @@ public final class HttpLoggingInterceptor implements Interceptor {
         Logger DEFAULT = new Logger() {
             @Override
             public void log(String message) {
-                Platform.get().log(message, Platform.INFO, null);
+                Platform.get().log(Platform.INFO, message, null);
             }
         };
     }

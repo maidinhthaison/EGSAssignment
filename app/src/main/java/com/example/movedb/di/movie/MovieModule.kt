@@ -19,7 +19,7 @@ class MovieModule {
 
     @Singleton
     @Provides
-    fun providePatientRepository(
+    fun provideMovieRepository(
         movieAPI: MovieAPI
     ): MovieRepository {
         return MovieRepositoryImpl(

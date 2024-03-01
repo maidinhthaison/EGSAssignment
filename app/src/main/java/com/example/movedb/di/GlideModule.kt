@@ -1,6 +1,7 @@
 package com.example.movedb.di
 
 import android.content.Context
+import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.Registry
@@ -13,9 +14,14 @@ import com.bumptech.glide.load.model.ModelLoader
 import com.bumptech.glide.load.model.ModelLoaderFactory
 import com.bumptech.glide.load.model.MultiModelLoaderFactory
 import com.bumptech.glide.load.model.stream.BaseGlideUrlLoader
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.FitCenter
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.module.AppGlideModule
+import com.bumptech.glide.request.RequestOptions
+import com.example.movedb.R
 import java.io.InputStream
-import java.util.regex.Pattern
+import java.util.regex.Pattern.compile
 
 @GlideModule
 class GlideUtils : AppGlideModule() {
@@ -53,18 +59,20 @@ class GlideUtils : AppGlideModule() {
         /**
          * Url The matching rules of 6550
          */
-        private val pattern= Pattern.compile("__w-((?:-?\\d+)+)__")
+        private val pattern= compile(/* regex = */ "__w-((?:-?\\d+)+)__")
         /**
          * Control the size of the image to be loaded
          */
         override fun getUrl(model: String, width: Int, height: Int, options: Options?): String {
-            var  m=pattern.matcher(model)
+            val m=pattern.matcher(model)
             var bestBucket=0
             if (m.find()){
-                var  found=m.group(1).split("-")
-                for (item in found){
-                    bestBucket=item.toInt()
-                    if (bestBucket>=width) break
+                val found= m.group(1)?.split("-")
+                if (found != null) {
+                    for (item in found){
+                        bestBucket=item.toInt()
+                        if (bestBucket>=width) break
+                    }
                 }
             }
             return model
@@ -94,16 +102,29 @@ class GlideUtils : AppGlideModule() {
         }
     }
 
-    /*fun loadImageDocumentItem(context: Context, url: String?, imageView: AppCompatImageView) {
+    fun loadPosterImage(context: Context, url: String?, imageView: AppCompatImageView) {
         val options: RequestOptions = RequestOptions()
-            .centerCrop()
-            .placeholder(R.drawable.ic_document_thumbnail)
-            .error(R.drawable.ic_document_thumbnail)
+            .fitCenter()
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_launcher_background)
         GlideApp.with(context)
             .load(url)
-            .transform(CenterCrop())
+            .transform(FitCenter())
             .apply(options)
             .transition(DrawableTransitionOptions.withCrossFade()).into(imageView)
 
-    }*/
+    }
+
+    fun loadBackDropImage(context: Context, url: String?, imageView: AppCompatImageView) {
+        val options: RequestOptions = RequestOptions()
+            .fitCenter()
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_launcher_background)
+        GlideApp.with(context)
+            .load(url)
+            .transform(FitCenter())
+            .apply(options)
+            .transition(DrawableTransitionOptions.withCrossFade()).into(imageView)
+
+    }
 }
