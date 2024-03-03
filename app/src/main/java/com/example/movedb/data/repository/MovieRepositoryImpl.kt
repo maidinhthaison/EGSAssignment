@@ -16,12 +16,12 @@ import retrofit2.http.Query
 
 class MovieRepositoryImpl(private val movieAPI: MovieAPI,
                           private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO) : MovieRepository {
-    override fun getMovies(version: String, include_adult: Boolean, include_video: Boolean,
+    override fun getMovies(include_adult: Boolean, include_video: Boolean,
                            language: String, page: Int, sort_by: String )
     : Flow<TaskResult<MovieModel>> = flow {
         emit(TaskResult.Loading)
         val result = SafeCallAPI.callApi {
-            movieAPI.getMovies(version = version, include_adult = include_adult, include_video = include_video,
+            movieAPI.getMovies(include_adult = include_adult, include_video = include_video,
                 language = language, page = page, sort_by = sort_by)
         }.map {
             it.toMovieModel()

@@ -32,9 +32,6 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*binding.btnToDetail.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_fragmentMovieDetail)
-        }*/
 
         movieAdapter =  MovieAdapter(context = requireContext())
         binding.rvMovies.apply {
@@ -44,7 +41,7 @@ class HomeFragment :
         }
 
         with(movieViewModel) {
-            getListMovies(version = "3", include_adult = true, include_video = true, language = "en-US",
+            getListMovies(include_adult = true, include_video = true, language = "en-US",
                 page = 1, sort_by = "popularity.desc")
         }
 

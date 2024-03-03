@@ -22,3 +22,4 @@ enum class BackendEnvironment(
 
 }
 const val PATH_IMAGE_URL: String  = "https://image.tmdb.org/t/p/w500"
+const val API_VERSION = "3"

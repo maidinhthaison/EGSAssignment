@@ -22,12 +22,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             R.id.nav_host_fragment
         ) as NavHostFragment
         navController = navHostFragment.navController
-
-        //listener
-        /*binding.imvBottomHome.setOnClickListener {
-            findNavController(R.id.ehealth_nav_host_fragment).navigate(R.id.eHealthHomeFragment)
-        }*/
-
     }
     override fun initBindingObject(inflater: LayoutInflater): ActivityMainBinding =
         ActivityMainBinding.inflate(layoutInflater)

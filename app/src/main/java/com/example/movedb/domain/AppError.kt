@@ -6,8 +6,7 @@ sealed class AppError{
         val errorCode: String? = null,
         val message: String = "Response Error",
         val errorId: String? = null
-    ) :
-        AppError()
+    ) : AppError()
 
     class NetworkError(val httpCode: Int? = null, val message: String = "Network Error") :
         AppError()
@@ -17,7 +16,7 @@ sealed class AppError{
     // For other error
     class GeneralError(val throwable: Throwable) : AppError()
 
-    fun getMessagegetMessage(): String {
+    fun getErrorMessage(): String {
         return when (this) {
             is ResponseError -> message
             is NetworkError -> message
@@ -26,4 +25,3 @@ sealed class AppError{
         }
     }
 }
-class ValidationException(message: String) : Exception(message)
