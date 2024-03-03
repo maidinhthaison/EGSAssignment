@@ -1,5 +1,6 @@
 package com.example.movedb.data.api.model.response
 
+import com.example.movedb.config.PATH_IMAGE_URL
 import com.example.movedb.domain.model.MovieModel
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -36,6 +37,13 @@ data class MovieItem(
     @SerializedName("video") val video: Boolean?,
     @SerializedName("vote_average") val vote_average: Float?,
     @SerializedName("vote_count") val vote_count: Int?
-) : Serializable
+) : Serializable {
+    fun getPosterPathURL(): String {
+        return PATH_IMAGE_URL.plus(poster_path)
+    }
+    fun getBackDropPathURL(): String {
+        return PATH_IMAGE_URL.plus(backdrop_path)
+    }
+}
 
 

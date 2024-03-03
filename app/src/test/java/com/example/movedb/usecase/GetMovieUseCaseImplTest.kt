@@ -26,7 +26,7 @@ class GetMovieUseCaseImplTest {
         runBlocking {
 
             val useCase = GetMovieUseCaseImpl(repository)
-            val results = useCase.invoke(version = "3", include_adult = true, include_video = true, language = "en-US",
+            val results = useCase.invoke(include_adult = true, include_video = true, language = "en-US",
                 page = 1, sort_by = "popularity.desc").take(2).toList()
             Assert.assertEquals(results[0], TaskResult.Loading)
             Assert.assertEquals(results[1], TaskResult.Success(results[1].value()))
@@ -37,7 +37,7 @@ class GetMovieUseCaseImplTest {
         runBlocking {
 
             val useCase = GetMovieUseCaseImpl(repository)
-            val results = useCase.invoke(version = "3", include_adult = true, include_video = true, language = "en-US",
+            val results = useCase.invoke(include_adult = true, include_video = true, language = "en-US",
                 page = 1, sort_by = "popularity.desc").take(2).toList()
             Assert.assertEquals(results[0], TaskResult.Loading)
             Assert.assertNotEquals(results[1], results[1].error()?.let { TaskResult.Failure(it) })

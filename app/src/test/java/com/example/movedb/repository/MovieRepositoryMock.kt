@@ -18,7 +18,6 @@ class MovieRepositoryMock : MovieRepository{
             movieModelMock.total_results)
     }
     override fun getMovies(
-        version: String,
         include_adult: Boolean,
         include_video: Boolean,
         language: String,
@@ -37,4 +36,5 @@ class MovieRepositoryMock : MovieRepository{
             }
         }
     }
+
 }

@@ -46,8 +46,7 @@ class MovieDetailFragment :
     private fun bindData(movieItem: MovieItem){
         binding.tvTitle.text = String.format(getString(R.string.text_movie_title),movieItem.title)
         GlideUtils().loadImageFitCenter(
-            requireContext(),
-            PATH_IMAGE_URL.plus(movieItem.backdrop_path), binding.ivBackDrop
+            requireContext(), movieItem.getBackDropPathURL(), binding.ivBackDrop
         )
         binding.rbAdult.isChecked = movieItem.adult!!
 

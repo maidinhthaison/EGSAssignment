@@ -51,8 +51,7 @@ internal class MovieAdapter (
             binding.pbVotePercent.progress = item.vote_average?.times(10)?.toInt()!!
             //Download image
             GlideUtils().loadImageCenterCrop(
-                context,
-                PATH_IMAGE_URL.plus(item.poster_path), binding.ivMovieThumb
+                context, item.getPosterPathURL(), binding.ivMovieThumb
             )
             binding.root.setOnClickListener {
                 onClicked?.invoke(ListMovieUIEvent.OnItemClicked(item))
